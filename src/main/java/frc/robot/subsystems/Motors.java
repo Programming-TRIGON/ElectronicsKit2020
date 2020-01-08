@@ -22,7 +22,10 @@ public class Motors extends SubsystemBase {
     }
   }
 
-  public void moveMotor(double power){
+  public Motors(){
+  }
+
+  public void moveMotors(double power){
     for (VictorSP victor : this.motors){
     victor.set(power);
     }
@@ -32,4 +35,5 @@ public class Motors extends SubsystemBase {
   public void periodic() {
     // This method will be called once per scheduler run
   }
+
 }
