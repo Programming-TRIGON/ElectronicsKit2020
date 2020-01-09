@@ -7,6 +7,7 @@
 
 package frc.robot.subsystems;
 
+import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.VictorSP;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
@@ -14,7 +15,7 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
    * Creates a new Motor, and hold all the functions of said motor.
    */
 public class Motors extends SubsystemBase {
-  VictorSP motors[];
+  SpeedController motors[];
 
   public Motors(int... motors) {
     for (int i = 0; i < this.motors.length; i++) {
