@@ -19,10 +19,8 @@ public class Robot extends TimedRobot {
 
   @Override
   public void robotInit() {
-    Robot.motorOne = new Motors(RobotMap.VICTOR_SP_1);
-    Robot.motorTwo = new Motors(RobotMap.VICTOR_SP_2);
-    Robot.motorThree = new Motors(RobotMap.VICTOR_SP_3);
-    Robot.motorOneAndThree = new Motors(RobotMap.VICTOR_SP_1, RobotMap.VICTOR_SP_3);
+    Robot.motorOne = new Motors(RobotComponents.VICTOR_SP_ONE);
+    Robot.motorOneAndThree = new Motors(RobotComponents.VICTOR_SP_ONE, RobotComponents.VICTOR_SP_THREE);
     Robot.oi = new OI();
     
     SmartDashboard.putData("move motors", new MoveMotors(motorOne, oi.getXboxController()::getY, () -> false));

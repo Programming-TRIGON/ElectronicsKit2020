@@ -5,11 +5,16 @@ package frc.robot;
  */
 public class RobotMap {
 
-    public static final int VICTOR_SP_1 = 0;
-    public static final int VICTOR_SP_2 = 1;
-    public static final int VICTOR_SP_3 = 2;
-    
-    public static final int DOUBLE_SOLENOID_1 = 3;
-    public static final int DOUBLE_SOLENOID_2 = 4;
-    public static final int DOUBLE_SOLENOID_3 = 5;
+    public static final int VICTOR_SP_ONE = 0;
+    public static final int VICTOR_SP_TWO = 1;
+    public static final int VICTOR_SP_THREE = 2;
+
+    public static final int DOUBLE_SOLENOID_ONE_CHANNEL_A = 3;
+    public static final int DOUBLE_SOLENOID_ONE_CHANNEL_B = 4;
+
+    public static final int DOUBLE_SOLENOID_TWO_CHANNEL_A = 5;
+    public static final int DOUBLE_SOLENOID_TWO_CHANNEL_B = 6;
+
+    public static final int DOUBLE_SOLENOID_THREE_CHANNEL_A = 7;
+    public static final int DOUBLE_SOLENOID_THREE_CHANNEL_B = 8;
 }
