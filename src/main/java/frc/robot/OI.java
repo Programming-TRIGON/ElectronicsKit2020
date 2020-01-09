@@ -9,10 +9,10 @@ public class OI {
     private XboxController driver;
 
     public OI(){
-        this.driver = new XboxController(0);
+        driver = new XboxController(0);
     }
 
     public XboxController getXboxController(){
-        return this.driver;
+        return driver;
     }
 }

@@ -11,7 +11,7 @@ public class DoubleSolenoids extends SubsystemBase {
 
   public DoubleSolenoids(int... doubleSolenoids) {
     for(int i = 0; i < doubleSolenoids.length; i++){
-    this.doubleSolenoids[i] = new DoubleSolenoid
+    //this.doubleSolenoids[i] = new DoubleSolenoid
     }
 
   }

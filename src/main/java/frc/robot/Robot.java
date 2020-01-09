@@ -1,31 +1,39 @@
 package frc.robot;
 
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
+
 import edu.wpi.first.wpilibj.TimedRobot;
+import edu.wpi.first.wpilibj.VictorSP;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
+import frc.robot.commands.DriveArcade;
 import frc.robot.commands.MoveMotors;
+import frc.robot.subsystems.Drivetrain;
 import frc.robot.subsystems.Motors;
 
 public class Robot extends TimedRobot {
   private Command m_autonomousCommand;
   public static OI oi;
+  public static Drivetrain drivetrain; 
   public static Motors motorOne;
   public static Motors motorTwo;
   public static Motors motorThree;
   public static Motors motorOneAndThree;
 
-
-
   @Override
   public void robotInit() {
-    Robot.motorOne = new Motors(RobotMap.VICTOR_SP_1);
+    drivetrain = new Drivetrain(new WPI_TalonSRX(4), new VictorSP(1),
+      new VictorSP(0), new VictorSP(2));
+    drivetrain.setDefaultCommand(new DriveArcade());
+
+    /*Robot.motorOne = new Motors(RobotMap.VICTOR_SP_1);
     Robot.motorTwo = new Motors(RobotMap.VICTOR_SP_2);
     Robot.motorThree = new Motors(RobotMap.VICTOR_SP_3);
-    Robot.motorOneAndThree = new Motors(RobotMap.VICTOR_SP_1, RobotMap.VICTOR_SP_3);
+    Robot.motorOneAndThree = new Motors(RobotMap.VICTOR_SP_1, RobotMap.VICTOR_SP_3);*/
     Robot.oi = new OI();
     
-    SmartDashboard.putData("move motors", new MoveMotors(motorOne, oi.getXboxController()::getY, () -> false));
+    // SmartDashboard.putData("move motors", new MoveMotors(motorOne, oi.getXboxController()::getY, () -> false));
   }
 
   @Override
