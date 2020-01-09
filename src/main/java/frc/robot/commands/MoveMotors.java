@@ -14,7 +14,6 @@ public class MoveMotors extends CommandBase {
   Motors motors;
 
   public MoveMotors(Motors motors, Supplier<Double> power, Supplier<Boolean> isFinished) {
-    addRequirements(motors);
     this.power = power;
     this.motors = motors;
     this.isFinished = isFinished;

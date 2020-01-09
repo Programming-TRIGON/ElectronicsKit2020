@@ -2,22 +2,22 @@ package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 /**
  * Creates a new Motor, and hold all the functions of said motor.
  */
 public class Motors extends SubsystemBase {
-  SpeedController[] motors;
+  private SpeedController motors[];
 
   public Motors(SpeedController... motors) {
-    for (int i = 0; i < this.motors.length; i++) {
-      this.motors[i] = motors[i];
-    }
+    this.motors = motors;
   }
 
-  public Motors(Command command, SpeedController... motors) {
+  public Motors(CommandBase command, SpeedController... motors) {
     this(motors);
+    command.addRequirements(this);
     setDefaultCommand(command);
   }
 
@@ -26,10 +26,4 @@ public class Motors extends SubsystemBase {
       speedController.set(power);
     }
   }
-
-  @Override
-  public void periodic() {
-    // This method will be called once per scheduler run
-  }
-
 }
