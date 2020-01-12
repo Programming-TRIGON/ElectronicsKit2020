@@ -1,5 +1,7 @@
 package frc.robot;
 
+import com.ctre.phoenix.motorcontrol.NeutralMode;
+
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
@@ -15,17 +17,19 @@ public class Robot extends TimedRobot {
 
   @Override
   public void robotInit() {
-    RobotComponents.talonleft.setInverted(true);
+    RobotComponents.tslonright.setNeutralMode(NeutralMode.Coast);
+    RobotComponents.talonleft.setNeutralMode(NeutralMode.Coast);
     motorOneAndThree = new Motors(RobotComponents.talonleft, RobotComponents.tslonright);
     oi = new OI();
 
-    SmartDashboard.putData("move motors", new MoveMotors(motorOneAndThree, oi.getXboxController()::getY, () -> false));
+    SmartDashboard.putData("move motors", new MoveMotors(motorOneAndThree, () -> -0.6, () -> false));
+    SmartDashboard.putData("stop motors", new MoveMotors(motorOneAndThree, () -> 0.0, () -> false));
   }
 
   @Override
   public void robotPeriodic() {
     CommandScheduler.getInstance().run();
-    SmartDashboard.putNumber("voltage", RobotComponents.talonleft.getBusVoltage());
+    SmartDashboard.putNumber("voltage", RobotComponents.talonleft.getStatorCurrent());
   }
 
   @Override
