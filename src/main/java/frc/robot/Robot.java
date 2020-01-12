@@ -11,30 +11,21 @@ public class Robot extends TimedRobot {
   private Command m_autonomousCommand;
   public static OI oi;
   // exm:
-  public static Motors motorOne;
-  public static Motors motorTwo;
-  public static Motors motorThree;
   public static Motors motorOneAndThree;
 
   @Override
   public void robotInit() {
-    motorOne = new Motors(new MoveMotors(motorOne, () -> 0.0, () -> false), RobotComponents.VICTOR_SP_ONE);
-    motorOneAndThree = new Motors(RobotComponents.VICTOR_SP_ONE, RobotComponents.VICTOR_SP_THREE);
+    RobotComponents.talonleft.setInverted(true);
+    motorOneAndThree = new Motors(RobotComponents.talonleft, RobotComponents.tslonright);
     oi = new OI();
 
-    SmartDashboard.putData("move motors", new MoveMotors(motorOne, oi.getXboxController()::getY, () -> false));
+    SmartDashboard.putData("move motors", new MoveMotors(motorOneAndThree, oi.getXboxController()::getY, () -> false));
   }
 
   @Override
   public void robotPeriodic() {
-    // Runs the Scheduler. This is responsible for polling buttons, adding
-    // newly-scheduled
-    // commands, running already-scheduled commands, removing finished or
-    // interrupted commands,
-    // and running subsystem periodic() methods. This must be called from the
-    // robot's periodic
-    // block in order for anything in the Command-based framework to work.
     CommandScheduler.getInstance().run();
+    SmartDashboard.putNumber("voltage", RobotComponents.talonleft.getBusVoltage());
   }
 
   @Override
