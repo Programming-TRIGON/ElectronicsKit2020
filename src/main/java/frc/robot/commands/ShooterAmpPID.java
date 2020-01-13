@@ -7,7 +7,6 @@ import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import edu.wpi.first.wpilibj.controller.PIDController;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpiutil.math.MathUtil;
-import frc.robot.subsystems.Motors;
 
 public class ShooterAmpPID extends CommandBase {
   PIDController pidController;
@@ -39,13 +38,13 @@ public class ShooterAmpPID extends CommandBase {
 
   @Override
   public void execute() {
-    motor.set(MathUtil.clamp(pidController.calculate(motor.getStatorCurrent()), -1, 1));
+    motor.set(MathUtil.clamp(pidController.calculate(motor.getStatorCurrent()), -1.0, 1.0));
   }
 
   @Override
   public void end(boolean interrupted) {
     pidController.close();
-    motor.set(0);
+    motor.set(0.0);
   }
 
   @Override

@@ -18,14 +18,14 @@ public class Robot extends TimedRobot {
 
   @Override
   public void robotInit() {
-    SmartDashboard.putNumber("kpleft: ", 0);
-    SmartDashboard.putNumber("kileft: ", 0);
-    SmartDashboard.putNumber("kdleft: ", 0);
-    SmartDashboard.putNumber("setpoint: ", 0);
-    SmartDashboard.putNumber("kpright: ", 0);
-    SmartDashboard.putNumber("kiright: ", 0);
-    SmartDashboard.putNumber("kdright: ", 0);
-    SmartDashboard.putNumber("motor power: ", 0);
+    SmartDashboard.putNumber("kpleft: ", 0.0);
+    SmartDashboard.putNumber("kileft: ", 0.0);
+    SmartDashboard.putNumber("kdleft: ", 0.0);
+    SmartDashboard.putNumber("setpoint: ", 0.0);
+    SmartDashboard.putNumber("kpright: ", 0.0);
+    SmartDashboard.putNumber("kiright: ", 0.0);
+    SmartDashboard.putNumber("kdright: ", 0.0);
+    SmartDashboard.putNumber("motor power: ", 0.0);
     SmartDashboard.putBoolean("pidEnd: ", false);
     RobotComponents.tslonright.setNeutralMode(NeutralMode.Coast);
     RobotComponents.talonleft.setNeutralMode(NeutralMode.Coast);
@@ -33,12 +33,12 @@ public class Robot extends TimedRobot {
     oi = new OI();
     // new MoveMotors(Robot.motorOneAndThree, () -> 0.0, () -> true);
     SmartDashboard.putData(
-        new ShooterAmpPID(() -> SmartDashboard.getNumber("kpleft: ", 0), () -> SmartDashboard.getNumber("kileft: ", 0),
-            () -> SmartDashboard.getNumber("kdleft: ", 0), () -> SmartDashboard.getNumber("setpoint: ", 0),
+        new ShooterAmpPID(() -> SmartDashboard.getNumber("kpleft: ", 0.0), () -> SmartDashboard.getNumber("kileft: ", 0),
+            () -> SmartDashboard.getNumber("kdleft: ", 0.0), () -> SmartDashboard.getNumber("setpoint: ", 0.0),
             RobotComponents.talonleft, () -> SmartDashboard.getBoolean("pidEnd: ", false))
-                .raceWith(new ShooterAmpPID(() -> SmartDashboard.getNumber("kpright: ", 0),
-                    () -> SmartDashboard.getNumber("kiright: ", 0), () -> SmartDashboard.getNumber("kdright: ", 0),
-                    () -> SmartDashboard.getNumber("setpoint: ", 0), RobotComponents.tslonright, () -> false)));
+                .raceWith(new ShooterAmpPID(() -> SmartDashboard.getNumber("kpright: ", 0.0),
+                    () -> SmartDashboard.getNumber("kiright: ", 0.0), () -> SmartDashboard.getNumber("kdright: ", 0),
+                    () -> SmartDashboard.getNumber("setpoint: ", 0.0), RobotComponents.tslonright, () -> false)));
 
     // SmartDashboard.putData("move motors", new MoveMotors(motorOneAndThree, () ->
     // -0.6, () -> false);
