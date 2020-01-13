@@ -17,19 +17,25 @@ public class Robot extends TimedRobot {
 
   @Override
   public void robotInit() {
+
+    SmartDashboard.putNumber("motor power: ", 0);
     RobotComponents.tslonright.setNeutralMode(NeutralMode.Coast);
     RobotComponents.talonleft.setNeutralMode(NeutralMode.Coast);
     motorOneAndThree = new Motors(RobotComponents.talonleft, RobotComponents.tslonright);
     oi = new OI();
+    new MoveMotors(Robot.motorOneAndThree, () -> 0.0, () -> true);
 
-    SmartDashboard.putData("move motors", new MoveMotors(motorOneAndThree, () -> -0.6, () -> false));
-    SmartDashboard.putData("stop motors", new MoveMotors(motorOneAndThree, () -> 0.0, () -> false));
+    // SmartDashboard.putData("move motors", new MoveMotors(motorOneAndThree, () ->
+    // -0.6, () -> false);
+    // SmartDashboard.putData("stop motors", new MoveMotors(motorOneAndThree, () ->
+    // 0.0, () -> false));
   }
 
   @Override
   public void robotPeriodic() {
     CommandScheduler.getInstance().run();
-    SmartDashboard.putNumber("voltage", RobotComponents.talonleft.getStatorCurrent());
+    SmartDashboard.putNumber("voltage 1: ", RobotComponents.talonleft.getStatorCurrent());
+    SmartDashboard.putNumber("voltage 2: ", RobotComponents.tslonright.getStatorCurrent());
   }
 
   @Override
