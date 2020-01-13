@@ -43,7 +43,6 @@ public class ShooterAmpPID extends CommandBase {
   @Override
   public void end(boolean interrupted) {
     pidController.close();
-    pidController.reset();
     motor.set(0);
   }
 
