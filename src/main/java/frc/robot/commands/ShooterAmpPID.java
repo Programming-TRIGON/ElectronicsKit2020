@@ -16,17 +16,19 @@ public class ShooterAmpPID extends CommandBase {
   Supplier<Double> kD;
   Supplier<Double> setpoint;
   WPI_TalonSRX motor;
+  Supplier<Boolean> isFinite;
 
   /**
    * This class does PID on the shooter motors based on the ampere value.
    */
   public ShooterAmpPID(Supplier<Double> kP, Supplier<Double> kI, Supplier<Double> kD,
-      Supplier<Double> setpoint, WPI_TalonSRX motor) {
+      Supplier<Double> setpoint, WPI_TalonSRX motor, Supplier<Boolean> isFinite) {
     this.kP = kP;
     this.kI = kI;
     this.kD = kD;
     this.setpoint = setpoint;
     this.motor = motor;
+    this.isFinite = isFinite;
   }
 
   @Override
@@ -48,6 +50,6 @@ public class ShooterAmpPID extends CommandBase {
 
   @Override
   public boolean isFinished() {
-    return false;
+    return isFinite.get();
   }
 }
