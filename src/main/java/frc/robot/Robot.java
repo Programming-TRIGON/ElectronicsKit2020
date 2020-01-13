@@ -7,6 +7,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frc.robot.commands.MoveMotors;
+import frc.robot.commands.ShooterAmpPID;
 import frc.robot.subsystems.Motors;
 
 public class Robot extends TimedRobot {
@@ -17,13 +18,23 @@ public class Robot extends TimedRobot {
 
   @Override
   public void robotInit() {
-
+    SmartDashboard.putNumber("kp: ", 0);
+    SmartDashboard.putNumber("ki: ", 0);
+    SmartDashboard.putNumber("kd: ", 0);
+    SmartDashboard.putNumber("setpoint: ", 0);
     SmartDashboard.putNumber("motor power: ", 0);
     RobotComponents.tslonright.setNeutralMode(NeutralMode.Coast);
     RobotComponents.talonleft.setNeutralMode(NeutralMode.Coast);
     motorOneAndThree = new Motors(RobotComponents.talonleft, RobotComponents.tslonright);
     oi = new OI();
-    new MoveMotors(Robot.motorOneAndThree, () -> 0.0, () -> true);
+    //new MoveMotors(Robot.motorOneAndThree, () -> 0.0, () -> true);
+    new ShooterAmpPID(() -> SmartDashboard.getNumber("kp: ", 0), () -> SmartDashboard.getNumber("ki: ", 0),
+        () -> SmartDashboard.getNumber("kd: ", 0), () -> SmartDashboard.getNumber("setpoint: ", 0),
+        RobotComponents.talonleft);
+    new ShooterAmpPID(() -> SmartDashboard.getNumber("kp: ", 0), () -> SmartDashboard.getNumber("ki: ", 0),
+        () -> SmartDashboard.getNumber("kd: ", 0), () -> SmartDashboard.getNumber("setpoint: ", 0),
+        RobotComponents.tslonright);
+
 
     // SmartDashboard.putData("move motors", new MoveMotors(motorOneAndThree, () ->
     // -0.6, () -> false);
