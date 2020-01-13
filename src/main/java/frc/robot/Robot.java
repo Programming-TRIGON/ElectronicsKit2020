@@ -18,13 +18,13 @@ public class Robot extends TimedRobot {
 
   @Override
   public void robotInit() {
-    SmartDashboard.putNumber("kp: ", 0);
-    SmartDashboard.putNumber("ki: ", 0);
-    SmartDashboard.putNumber("kd: ", 0);
+    SmartDashboard.putNumber("kpleft: ", 0);
+    SmartDashboard.putNumber("kileft: ", 0);
+    SmartDashboard.putNumber("kdleft: ", 0);
     SmartDashboard.putNumber("setpoint: ", 0);
-    SmartDashboard.putNumber("kp2: ", 0);
-    SmartDashboard.putNumber("ki2: ", 0);
-    SmartDashboard.putNumber("kd2: ", 0);
+    SmartDashboard.putNumber("kpright: ", 0);
+    SmartDashboard.putNumber("kiright: ", 0);
+    SmartDashboard.putNumber("kdright: ", 0);
     SmartDashboard.putNumber("motor power: ", 0);
     SmartDashboard.putBoolean("pidEnd: ", false);
     RobotComponents.tslonright.setNeutralMode(NeutralMode.Coast);
