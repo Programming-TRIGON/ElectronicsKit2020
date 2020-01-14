@@ -15,23 +15,26 @@ public class ShooterAmpPID extends CommandBase {
   Supplier<Double> kI;
   Supplier<Double> kD;
   Supplier<Double> setpoint;
-  WPI_TalonSRX motor;
-  Supplier<Boolean> isFinite;
-  double startTime;
+  Supplier<Double> offset;
   Supplier<Double> waitTime;
+  WPI_TalonSRX motor;
+  Supplier<Boolean> isFinished;
+  double startTime;
+  
 
   /**
    * This class does PID on the shooter motors based on the ampere value.
    */
   public ShooterAmpPID(Supplier<Double> kP, Supplier<Double> kI, Supplier<Double> kD,
-      Supplier<Double> setpoint, WPI_TalonSRX motor, Supplier<Boolean> isFinite, Supplier<Double> waitTime) {
+      Supplier<Double> setpoint, WPI_TalonSRX motor, Supplier<Boolean> isFinite, Supplier<Double> waitTime, Supplier<Double> offset) {
     this.kP = kP;
     this.kI = kI;
     this.kD = kD;
     this.setpoint = setpoint;
     this.motor = motor;
-    this.isFinite = isFinite;
+    this.isFinished = isFinite;
     this.waitTime = waitTime;
+    this.offset = offset;
   }
 
   @Override
@@ -44,7 +47,7 @@ public class ShooterAmpPID extends CommandBase {
   @Override
   public void execute() {
     if (Timer.getFPGATimestamp() > startTime + waitTime.get())
-      motor.set(MathUtil.clamp(pidController.calculate(motor.getStatorCurrent()), -1, 1));
+      motor.set(MathUtil.clamp(pidController.calculate(motor.getStatorCurrent() + offset.get()), -1, 1));
     else 
       motor.set(0.5);
   }
@@ -57,6 +60,6 @@ public class ShooterAmpPID extends CommandBase {
 
   @Override
   public boolean isFinished() {
-    return isFinite.get();
+    return isFinished.get();
   }
 }

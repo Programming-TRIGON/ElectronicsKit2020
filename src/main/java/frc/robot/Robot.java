@@ -36,11 +36,11 @@ public class Robot extends TimedRobot {
     SmartDashboard.putData(new ShooterAmpPID(() -> SmartDashboard.getNumber("kpleft: ", 0.0),
         () -> SmartDashboard.getNumber("kileft: ", 0), () -> SmartDashboard.getNumber("kdleft: ", 0.0),
         () -> SmartDashboard.getNumber("setpoint: ", 0.0), RobotComponents.talonleft,
-        () -> SmartDashboard.getBoolean("pidEnd: ", false), () -> SmartDashboard.getNumber("waitTime: ", 0))
+        () -> SmartDashboard.getBoolean("pidEnd: ", false), () -> SmartDashboard.getNumber("waitTime: ", 0), () -> SmartDashboard.getNumber("Offset: ", 0))
             .raceWith(new ShooterAmpPID(() -> SmartDashboard.getNumber("kpright: ", 0.0),
                 () -> SmartDashboard.getNumber("kiright: ", 0.0), () -> SmartDashboard.getNumber("kdright: ", 0),
                 () -> SmartDashboard.getNumber("setpoint: ", 0.0), RobotComponents.tslonright, () -> false,
-                () -> SmartDashboard.getNumber("waitTime: ", 0))));
+                () -> SmartDashboard.getNumber("waitTime: ", 0), () -> SmartDashboard.getNumber("Offset: ", 0))));
 
     // SmartDashboard.putData("move motors", new MoveMotors(motorOneAndThree, () ->
     // 0.6, () -> false));
