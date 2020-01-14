@@ -26,9 +26,7 @@ public class Robot extends TimedRobot {
     SmartDashboard.putNumber("kiright: ", 0.0);
     SmartDashboard.putNumber("kdright: ", 0.0);
     SmartDashboard.putNumber("motor power: ", 0.0);
-    SmartDashboard.putNumber("Motor Offset: ", 0.0);
     SmartDashboard.putBoolean("pidEnd: ", false);
-    SmartDashboard.
     RobotComponents.tslonright.setNeutralMode(NeutralMode.Coast);
     RobotComponents.talonleft.setNeutralMode(NeutralMode.Coast);
     motorOneAndThree = new Motors(RobotComponents.talonleft, RobotComponents.tslonright);
@@ -37,10 +35,10 @@ public class Robot extends TimedRobot {
     SmartDashboard.putData(
         new ShooterAmpPID(() -> SmartDashboard.getNumber("kpleft: ", 0.0), () -> SmartDashboard.getNumber("kileft: ", 0),
             () -> SmartDashboard.getNumber("kdleft: ", 0.0), () -> SmartDashboard.getNumber("setpoint: ", 0.0),
-            RobotComponents.talonleft, () -> SmartDashboard.getBoolean("pidEnd: ", false), () -> SmartDashboard.getNumber("Motor Offset: ", 0.0))
+            RobotComponents.talonleft, () -> SmartDashboard.getBoolean("pidEnd: ", false))
                 .raceWith(new ShooterAmpPID(() -> SmartDashboard.getNumber("kpright: ", 0.0),
                     () -> SmartDashboard.getNumber("kiright: ", 0.0), () -> SmartDashboard.getNumber("kdright: ", 0),
-                    () -> SmartDashboard.getNumber("setpoint: ", 0.0), RobotComponents.tslonright, () -> false, () -> SmartDashboard.getNumber("Motor Offset: ", 0.0))));
+                    () -> SmartDashboard.getNumber("setpoint: ", 0.0), RobotComponents.tslonright, () -> false)));
 
     // SmartDashboard.putData("move motors", new MoveMotors(motorOneAndThree, () ->
     // -0.6, () -> false);
