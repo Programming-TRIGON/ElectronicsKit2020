@@ -6,6 +6,7 @@ import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.controller.PIDController;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpiutil.math.MathUtil;
 
@@ -39,6 +40,7 @@ public class ShooterAmpPID extends CommandBase {
 
   @Override
   public void initialize() {
+    SmartDashboard.putBoolean("timer: ", false);
     startTime = Timer.getFPGATimestamp();
     pidController = new PIDController(kP.get(), kI.get(), kD.get());
     pidController.setSetpoint(Math.abs(setpoint.get()));
@@ -46,11 +48,13 @@ public class ShooterAmpPID extends CommandBase {
 
   @Override
   public void execute() {
-    if (Timer.getFPGATimestamp() > startTime + waitTime.get())
+    if (Timer.getFPGATimestamp() > startTime + waitTime.get()){
       motor.set(MathUtil.clamp(pidController.calculate(motor.getStatorCurrent()) + offset.get(), 0, 1));
+      SmartDashboard.putBoolean("timer: ", true);
+    }
     else 
       motor.set(offset.get());
-  }
+    }
 
   @Override
   public void end(boolean interrupted) {
