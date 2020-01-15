@@ -22,6 +22,7 @@ public class Robot extends TimedRobot {
 
     RobotComponents.talonright.setNeutralMode(NeutralMode.Coast);
     RobotComponents.talonleft.setNeutralMode(NeutralMode.Coast);
+    //RobotComponents.talonright.setInverted(true);
     motorOneAndThree = new Motors(RobotComponents.talonleft, RobotComponents.talonright);
     oi = new OI();
 
