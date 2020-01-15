@@ -11,17 +11,18 @@ import frc.robot.subsystems.Motors;
  * moves the motor
  */
 public class MoveMotors extends CommandBase {
-  double WAIT_TIME = 4;
+  Supplier<Double> waitTime;
   Supplier<Double> power;
   Supplier<Boolean> isFinished;
   double startTime;
   Motors motors;
 
-  public MoveMotors(Motors motors, Supplier<Double> power, Supplier<Boolean> isFinished) {
+  public MoveMotors(Motors motors, Supplier<Double> power, Supplier<Boolean> isFinished, Supplier<Double> waitTime) {
     addRequirements(motors);
     this.power = power;
     this.motors = motors;
     this.isFinished = isFinished;
+    this.waitTime = waitTime;
   }
 
   @Override
@@ -32,7 +33,7 @@ public class MoveMotors extends CommandBase {
   @Override
   public void execute() {
     motors.moveMotors(power.get());
-    SmartDashboard.putBoolean("Put Ball", Timer.getFPGATimestamp() > startTime + WAIT_TIME); 
+    SmartDashboard.putBoolean("Put Ball", Timer.getFPGATimestamp() > startTime + waitTime.get()); 
   }
 
   @Override

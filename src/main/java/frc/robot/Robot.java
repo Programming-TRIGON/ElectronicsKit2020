@@ -18,14 +18,16 @@ public class Robot extends TimedRobot {
   @Override
   public void robotInit() {
     SmartDashboard.putNumber("motor power: ", 0.0);
+    SmartDashboard.putNumber("wait time: ", 0.0);
 
     RobotComponents.tslonright.setNeutralMode(NeutralMode.Coast);
     RobotComponents.talonleft.setNeutralMode(NeutralMode.Coast);
     motorOneAndThree = new Motors(RobotComponents.talonleft, RobotComponents.tslonright);
     oi = new OI();
 
-    SmartDashboard.putData("move motors", new MoveMotors(motorOneAndThree, () ->
-    0.6, () -> false));
+    SmartDashboard.putData("move motors",
+        new MoveMotors(motorOneAndThree, () -> SmartDashboard.getNumber("motor power: ", 0.0), () -> false,
+            () -> SmartDashboard.getNumber("wait time: ", 0.0)));
   }
 
   @Override
