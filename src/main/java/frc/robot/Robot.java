@@ -20,9 +20,9 @@ public class Robot extends TimedRobot {
     SmartDashboard.putNumber("motor power: ", 0.0);
     SmartDashboard.putNumber("wait time: ", 0.0);
 
-    RobotComponents.tslonright.setNeutralMode(NeutralMode.Coast);
+    RobotComponents.talonright.setNeutralMode(NeutralMode.Coast);
     RobotComponents.talonleft.setNeutralMode(NeutralMode.Coast);
-    motorOneAndThree = new Motors(RobotComponents.talonleft, RobotComponents.tslonright);
+    motorOneAndThree = new Motors(RobotComponents.talonleft, RobotComponents.talonright);
     oi = new OI();
 
     SmartDashboard.putData("move motors",
@@ -34,11 +34,11 @@ public class Robot extends TimedRobot {
   public void robotPeriodic() {
     CommandScheduler.getInstance().run();
     SmartDashboard.putNumber("Voltage Right: ", RobotComponents.talonleft.getStatorCurrent());
-    SmartDashboard.putNumber("Voltage Left: ", RobotComponents.tslonright.getStatorCurrent());
+    SmartDashboard.putNumber("Voltage Left: ", RobotComponents.talonright.getStatorCurrent());
     SmartDashboard.putBoolean("is right on speed: ",
         RobotComponents.talonleft.getStatorCurrent() < 31 && RobotComponents.talonleft.getStatorCurrent() > 27);
     SmartDashboard.putBoolean("is left on speed: ",
-        RobotComponents.tslonright.getStatorCurrent() < 26 && RobotComponents.tslonright.getStatorCurrent() > 23);
+        RobotComponents.talonright.getStatorCurrent() < 26 && RobotComponents.talonright.getStatorCurrent() > 23);
   }
 
   @Override
