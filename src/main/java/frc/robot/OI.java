@@ -14,10 +14,10 @@ public class OI {
     private XboxController driver;
 
     public OI() {
-        driver = new XboxController(0);
-        buttonA = new JoystickButton(driver, Button.kA.value);
-        buttonA.whileHeld(new MoveMotors(Robot.motorOneAndThree, () -> SmartDashboard.getNumber("motor power: ", 0),
-                () -> false));
+       // driver = new XboxController(0);
+       // buttonA = new JoystickButton(driver, Button.kA.value);
+        // buttonA.whileHeld(new MoveMotors(Robot.motorOneAndThree, () -> SmartDashboard.getNumber("motor power: ", 0),
+        //        () -> false));
     }
 
     public XboxController getXboxController() {

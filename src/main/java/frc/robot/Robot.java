@@ -7,7 +7,6 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frc.robot.commands.MoveMotors;
-import frc.robot.commands.ShooterAmpPID;
 import frc.robot.subsystems.Motors;
 
 public class Robot extends TimedRobot {
@@ -18,39 +17,29 @@ public class Robot extends TimedRobot {
 
   @Override
   public void robotInit() {
-    SmartDashboard.putNumber("kpleft: ", 0.0);
-    SmartDashboard.putNumber("kileft: ", 0.0);
-    SmartDashboard.putNumber("kdleft: ", 0.0);
-    SmartDashboard.putNumber("setpoint: ", 0.0);
-    SmartDashboard.putNumber("kpright: ", 0.0);
-    SmartDashboard.putNumber("kiright: ", 0.0);
-    SmartDashboard.putNumber("kdright: ", 0.0);
     SmartDashboard.putNumber("motor power: ", 0.0);
-    SmartDashboard.putBoolean("pidEnd: ", false);
-    RobotComponents.tslonright.setNeutralMode(NeutralMode.Coast);
-    RobotComponents.talonleft.setNeutralMode(NeutralMode.Coast);
-    motorOneAndThree = new Motors(RobotComponents.talonleft, RobotComponents.tslonright);
-    oi = new OI();
-    // new MoveMotors(Robot.motorOneAndThree, () -> 0.0, () -> true);
-    SmartDashboard.putData(
-        new ShooterAmpPID(() -> SmartDashboard.getNumber("kpleft: ", 0.0), () -> SmartDashboard.getNumber("kileft: ", 0),
-            () -> SmartDashboard.getNumber("kdleft: ", 0.0), () -> SmartDashboard.getNumber("setpoint: ", 0.0),
-            RobotComponents.talonleft, () -> SmartDashboard.getBoolean("pidEnd: ", false))
-                .raceWith(new ShooterAmpPID(() -> SmartDashboard.getNumber("kpright: ", 0.0),
-                    () -> SmartDashboard.getNumber("kiright: ", 0.0), () -> SmartDashboard.getNumber("kdright: ", 0),
-                    () -> SmartDashboard.getNumber("setpoint: ", 0.0), RobotComponents.tslonright, () -> false)));
+    SmartDashboard.putNumber("wait time: ", 0.0);
 
-    // SmartDashboard.putData("move motors", new MoveMotors(motorOneAndThree, () ->
-    // -0.6, () -> false);
-    // SmartDashboard.putData("stop motors", new MoveMotors(motorOneAndThree, () ->
-    // 0.0, () -> false));
+    RobotComponents.talonright.setNeutralMode(NeutralMode.Coast);
+    RobotComponents.talonleft.setNeutralMode(NeutralMode.Coast);
+    //RobotComponents.talonright.setInverted(true);
+    motorOneAndThree = new Motors(RobotComponents.talonleft, RobotComponents.talonright);
+    oi = new OI();
+
+    SmartDashboard.putData("move motors",
+        new MoveMotors(motorOneAndThree, () -> SmartDashboard.getNumber("motor power: ", 0.0), () -> false,
+            () -> SmartDashboard.getNumber("wait time: ", 0.0)));
   }
 
   @Override
   public void robotPeriodic() {
     CommandScheduler.getInstance().run();
-    SmartDashboard.putNumber("voltage 1: ", RobotComponents.talonleft.getStatorCurrent());
-    SmartDashboard.putNumber("voltage 2: ", RobotComponents.tslonright.getStatorCurrent());
+    SmartDashboard.putNumber("Voltage Right: ", RobotComponents.talonleft.getStatorCurrent());
+    SmartDashboard.putNumber("Voltage Left: ", RobotComponents.talonright.getStatorCurrent());
+    SmartDashboard.putBoolean("is right on speed: ",
+        RobotComponents.talonleft.getStatorCurrent() < 31 && RobotComponents.talonleft.getStatorCurrent() > 27);
+    SmartDashboard.putBoolean("is left on speed: ",
+        RobotComponents.talonright.getStatorCurrent() < 26 && RobotComponents.talonright.getStatorCurrent() > 23);
   }
 
   @Override
