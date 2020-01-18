@@ -3,6 +3,7 @@ package frc.robot.subsystems;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 import edu.wpi.first.wpilibj.SpeedController;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
@@ -20,13 +21,12 @@ public class Motors extends SubsystemBase {
     this(motors);
     command.addRequirements(this);
     setDefaultCommand(command);
-    
+    SmartDashboard.putNumber("leftFriction", 0);
   }
 
   public void moveMotors(double power) {
     for (SpeedController speedController : this.motors) {
       speedController.set(power);
     }
-
   }
 }
