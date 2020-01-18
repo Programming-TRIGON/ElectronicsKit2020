@@ -25,11 +25,14 @@ public class Robot extends TimedRobot {
     //RobotComponents.talonright.setInverted(true);
     motorOneAndThree = new Motors(RobotComponents.talonleft, RobotComponents.talonright);
     oi = new OI();
+    
 
     SmartDashboard.putData("move motors",
         new MoveMotors(motorOneAndThree, () -> SmartDashboard.getNumber("motor power: ", 0.0), () -> false,
             () -> SmartDashboard.getNumber("wait time: ", 0.0)));
   }
+
+  
 
   @Override
   public void robotPeriodic() {
