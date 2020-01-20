@@ -20,4 +20,6 @@ public class RobotMap {
 
     public static final int DOUBLE_SOLENOID_THREE_CHANNEL_A = 7;
     public static final int DOUBLE_SOLENOID_THREE_CHANNEL_B = 2;
+
+    public static final int LED_CONTROLLER = 0;
 }

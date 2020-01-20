@@ -1,4 +1,4 @@
-package frc.robot.subsystems.led;
+package frc.robot.subsystems;
 
 import java.util.Random;
 
@@ -7,7 +7,7 @@ import edu.wpi.first.wpilibj.Notifier;
 import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj.DriverStation.Alliance;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import frc.robot.Robot;
+import frc.robot.RobotMap;
 
 public class LED extends SubsystemBase {
   private static final double BLINK_TIME = 0.2;
@@ -23,7 +23,7 @@ public class LED extends SubsystemBase {
    * Creates a new LED subsystem for Rev robotics Led controller and color changing.
    */
   public LED() {
-    ledController = new Spark(Robot.robotConstants.pwm.LED_CONTROLLER);
+    ledController = new Spark(RobotMap.LED_CONTROLLER);
     currentColor = LEDColor.Off;
     blinkingAmount = -1;
     notifier = new Notifier(this::notifierPeriodic);
