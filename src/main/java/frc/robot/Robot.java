@@ -1,6 +1,10 @@
 package frc.robot;
 
+import com.ctre.phoenix.ErrorCode;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
+import com.ctre.phoenix.motorcontrol.TalonFXFeedbackDevice;
+import com.ctre.phoenix.motorcontrol.TalonSRXFeedbackDevice;
+import com.ctre.phoenix.motorcontrol.can.TalonSRXConfiguration;
 
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -22,6 +26,16 @@ public class Robot extends TimedRobot {
 
     RobotComponents.talonright.setNeutralMode(NeutralMode.Coast);
     RobotComponents.talonleft.setNeutralMode(NeutralMode.Coast);
+    
+    RobotComponents.talonright.configOpenloopRamp(1);
+    RobotComponents.talonleft.configOpenloopRamp(1);
+    
+    ErrorCode err = RobotComponents.talonright.configSelectedFeedbackSensor(TalonSRXFeedbackDevice.None,0,0);
+    System.out.println(err.toString());
+
+    if(err != ErrorCode.OK)
+      System.out.println("Encoder not found!");
+
     //RobotComponents.talonright.setInverted(true);
     motorOneAndThree = new Motors(RobotComponents.talonleft, RobotComponents.talonright);
     oi = new OI();
