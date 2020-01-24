@@ -11,6 +11,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frc.robot.commands.MoveMotors;
+import frc.robot.commands.SensorCheck;
 import frc.robot.subsystems.Motors;
 
 public class Robot extends TimedRobot {
@@ -30,7 +31,7 @@ public class Robot extends TimedRobot {
     RobotComponents.talonright.configOpenloopRamp(1);
     RobotComponents.talonleft.configOpenloopRamp(1);
     
-    ErrorCode err = RobotComponents.talonright.configSelectedFeedbackSensor(TalonSRXFeedbackDevice.None,0,0);
+    ErrorCode err = RobotComponents.talonright.configSelectedFeedbackSensor(TalonSRXFeedbackDevice.CTRE_MagEncoder_Relative,0,0);
     System.out.println(err.toString());
 
     if(err != ErrorCode.OK)
@@ -40,6 +41,7 @@ public class Robot extends TimedRobot {
     motorOneAndThree = new Motors(RobotComponents.talonleft, RobotComponents.talonright);
     oi = new OI();
     
+    SmartDashboard.putData("Sensor check", new SensorCheck());
 
     SmartDashboard.putData("move motors",
         new MoveMotors(motorOneAndThree, () -> SmartDashboard.getNumber("motor power: ", 0.0), () -> false,
@@ -51,6 +53,7 @@ public class Robot extends TimedRobot {
   @Override
   public void robotPeriodic() {
     CommandScheduler.getInstance().run();
+    SmartDashboard.putNumber("sensor pos", RobotComponents.talonright.getSelectedSensorPosition());
     SmartDashboard.putNumber("Voltage Right: ", RobotComponents.talonleft.getStatorCurrent());
     SmartDashboard.putNumber("Voltage Left: ", RobotComponents.talonright.getStatorCurrent());
     SmartDashboard.putBoolean("is right on speed: ",
